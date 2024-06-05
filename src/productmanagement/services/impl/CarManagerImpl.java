@@ -1,6 +1,5 @@
 package productmanagement.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import productmanagement.dao.CarDao;
@@ -13,14 +12,13 @@ public class CarManagerImpl implements CarManager {
 	private CarDao carDao = new CarDaoImpl();
 
 	@Override
-	public boolean addCar(Car c) {
+	public void addCar(Car c) {
 		carDao.addCar(c);
-		return true;
 		//return carList.add(c);
 	}
 
 	@Override
-	public boolean editCar(Car c) {
+	public void editCar(Car c) {
 //		for (int i = 0; i < carList.size(); i++) {
 //			if (carList.get(i).getProduct_id() == c.getProduct_id()) {
 //				carList.set(i, c);
@@ -29,11 +27,10 @@ public class CarManagerImpl implements CarManager {
 //		}
 //		return false;
 		carDao.updateCar(c);
-		return true;
 	}
 
 	@Override
-	public boolean delCar(int id) {
+	public void delCar(int id) {
 //		for (int i = 0; i < carList.size(); i++) {
 //			if (carList.get(i).getProduct_id() == id) {
 //				carList.remove(i);
@@ -42,7 +39,6 @@ public class CarManagerImpl implements CarManager {
 //		}
 //		return false;
 		carDao.deleteCar(id);
-		return true;
 	}
 
 	@Override

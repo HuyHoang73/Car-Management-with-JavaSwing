@@ -6,11 +6,11 @@ import productmanagement.model.dto.CarSearchDTO;
 import productmanagement.model.entity.Car;
 
 public interface CarManager {
-	public boolean addCar(Car c);
+	public void addCar(Car c);
 
-	public boolean editCar(Car c);
+	public void editCar(Car c);
 
-	public boolean delCar(int id);
+	public void delCar(int id);
 	
 	public List<Car> searchCar(CarSearchDTO modelSearch);
 	

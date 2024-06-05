@@ -31,7 +31,7 @@ import productmanagement.utils.NumberUtils;
 
 public class CarManagerView {
 	private CarManager carManager;
-	private JFrame frame;
+	private JFrame frmCarManagement;
 	private JPanel panel;
 	private JLabel labelSearchName;
 	private JLabel labelSearchManufacturer;
@@ -63,7 +63,7 @@ public class CarManagerView {
 			public void run() {
 				try {
 					CarManagerView window = new CarManagerView();
-					window.frame.setVisible(true);
+					window.frmCarManagement.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -94,17 +94,19 @@ public class CarManagerView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(255, 255, 153));
-		frame.setBounds(100, 100, 1068, 706);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmCarManagement = new JFrame();
+		frmCarManagement.setTitle("Car Management");
+		frmCarManagement.getContentPane().setBackground(new Color(255, 255, 153));
+		frmCarManagement.setBounds(100, 100, 1068, 706);
+		frmCarManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCarManagement.getContentPane().setLayout(null);
+		frmCarManagement.setLocationRelativeTo(null);
 
 		panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 23, 1032, 219);
-		frame.getContentPane().add(panel);
+		frmCarManagement.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		labelSearchName = new JLabel("Name");
@@ -203,14 +205,14 @@ public class CarManagerView {
 				String minPriceInput = txtSearchMinPrice.getText().trim();
 				if (!minPriceInput.isEmpty()) {
 					if (!NumberUtils.isDouble(minPriceInput)) {
-						JOptionPane.showMessageDialog(frame, "Price must be number", "Error",
+						JOptionPane.showMessageDialog(frmCarManagement, "Price must be number", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						Double searchMinPrice = Double.parseDouble(minPriceInput);
 						if (NumberUtils.positiveNumber(searchMinPrice)) {
 							modelSearch.setMinPrice(searchMinPrice);
 						} else {
-							JOptionPane.showMessageDialog(frame, "Price must > 0", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(frmCarManagement, "Price must > 0", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -218,14 +220,14 @@ public class CarManagerView {
 				String maxPriceInput = txtSearchMaxPrice.getText().trim();
 				if (!maxPriceInput.isEmpty()) {
 					if (!NumberUtils.isDouble(maxPriceInput)) {
-						JOptionPane.showMessageDialog(frame, "Price must be number", "Error",
+						JOptionPane.showMessageDialog(frmCarManagement, "Price must be number", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						Double searchMaxPrice = Double.parseDouble(maxPriceInput);
 						if (NumberUtils.positiveNumber(searchMaxPrice)) {
 							modelSearch.setMaxPrice(searchMaxPrice);
 						} else {
-							JOptionPane.showMessageDialog(frame, "Price must > 0", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(frmCarManagement, "Price must > 0", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -233,14 +235,14 @@ public class CarManagerView {
 				String minSeatsInput = txtSearchMinSeats.getText().trim();
 				if (!minSeatsInput.isEmpty()) {
 					if (!NumberUtils.isDouble(minSeatsInput)) {
-						JOptionPane.showMessageDialog(frame, "Price must be number", "Error",
+						JOptionPane.showMessageDialog(frmCarManagement, "Price must be number", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						Integer searchMinSeats = Integer.parseInt(minSeatsInput);
 						if (NumberUtils.positiveNumber(searchMinSeats)) {
 							modelSearch.setMinSeats(searchMinSeats);
 						} else {
-							JOptionPane.showMessageDialog(frame, "Number of seats must > 0", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(frmCarManagement, "Number of seats must > 0", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -248,14 +250,14 @@ public class CarManagerView {
 				String maxSeatsInput = txtSearchMaxSeats.getText().trim();
 				if (!maxSeatsInput.isEmpty()) {
 					if (!NumberUtils.isDouble(maxSeatsInput)) {
-						JOptionPane.showMessageDialog(frame, "Price must be number", "Error",
+						JOptionPane.showMessageDialog(frmCarManagement, "Price must be number", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						Integer searchMaxSeats = Integer.parseInt(maxSeatsInput);
 						if (NumberUtils.positiveNumber(searchMaxSeats)) {
 							modelSearch.setMaxSeats(searchMaxSeats);
 						} else {
-							JOptionPane.showMessageDialog(frame, "Number of seats must > 0", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(frmCarManagement, "Number of seats must > 0", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -283,25 +285,25 @@ public class CarManagerView {
 		btnInsertCar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AddCarView().setVisible(true);
-				frame.dispose();
+				frmCarManagement.dispose();
 			}
 		});
 		btnInsertCar.setForeground(new Color(255, 255, 255));
 		btnInsertCar.setBackground(new Color(0, 204, 51));
-		btnInsertCar.setBounds(688, 264, 109, 31);
-		frame.getContentPane().add(btnInsertCar);
+		btnInsertCar.setBounds(688, 597, 109, 31);
+		frmCarManagement.getContentPane().add(btnInsertCar);
 
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = carTable.getSelectedRow();
 				if (row == -1) {
-					JOptionPane.showMessageDialog(frame, "Please choose car need delete", "Error",
+					JOptionPane.showMessageDialog(frmCarManagement, "Please choose car need delete", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					int id = (int) carTable.getValueAt(row, 0);
 					String name = (String) carTable.getValueAt(row, 1);
-					int confirm = JOptionPane.showConfirmDialog(frame, "Delete " + name + " with ID is " + id);
+					int confirm = JOptionPane.showConfirmDialog(frmCarManagement, "Delete " + name + " with ID is " + id);
 					if (confirm == JOptionPane.YES_OPTION) {
 						carManager.delCar(id);
 						tableModel.setRowCount(0);
@@ -312,12 +314,12 @@ public class CarManagerView {
 		});
 		btnDelete.setForeground(Color.WHITE);
 		btnDelete.setBackground(new Color(204, 0, 0));
-		btnDelete.setBounds(926, 264, 116, 31);
-		frame.getContentPane().add(btnDelete);
+		btnDelete.setBounds(926, 597, 116, 31);
+		frmCarManagement.getContentPane().add(btnDelete);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 358, 1032, 274);
-		frame.getContentPane().add(scrollPane);
+		scrollPane.setBounds(10, 299, 1032, 274);
+		frmCarManagement.getContentPane().add(scrollPane);
 
 		carTable = new JTable();
 		carTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -333,7 +335,7 @@ public class CarManagerView {
 			public void actionPerformed(ActionEvent e) {
 				int row = carTable.getSelectedRow();
 				if (row == -1) {
-					JOptionPane.showMessageDialog(frame, "Please choose car need edit", "Error",
+					JOptionPane.showMessageDialog(frmCarManagement, "Please choose car need edit", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					Car carSelected = new Car();
@@ -347,19 +349,19 @@ public class CarManagerView {
 					EditCarView editCarView = new EditCarView();
 					editCarView.setVisible(true);
 					editCarView.getCar(carSelected);
-					frame.dispose();
+					frmCarManagement.dispose();
 				}
 			}
 		});
 		btnEditCar.setForeground(Color.WHITE);
 		btnEditCar.setBackground(new Color(0, 102, 255));
-		btnEditCar.setBounds(807, 264, 109, 31);
-		frame.getContentPane().add(btnEditCar);
+		btnEditCar.setBounds(807, 597, 109, 31);
+		frmCarManagement.getContentPane().add(btnEditCar);
 
 		labelSort = new JLabel("Sort by:");
 		labelSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelSort.setBounds(790, 317, 88, 35);
-		frame.getContentPane().add(labelSort);
+		labelSort.setBounds(816, 253, 58, 35);
+		frmCarManagement.getContentPane().add(labelSort);
 
 		comboBoxSort = new JComboBox<Object>();
 		comboBoxSort.addActionListener(new ActionListener() {
@@ -392,12 +394,12 @@ public class CarManagerView {
 		labelSort.setLabelFor(comboBoxSort);
 		comboBoxSort.setBackground(new Color(255, 255, 255));
 		comboBoxSort.setModel(new DefaultComboBoxModel<Object>(new String[] { "Default", "Price", "Number of seats" }));
-		comboBoxSort.setBounds(888, 325, 154, 22);
-		frame.getContentPane().add(comboBoxSort);
+		comboBoxSort.setBounds(874, 261, 154, 22);
+		frmCarManagement.getContentPane().add(comboBoxSort);
 	}
 
 	public void setVisible(boolean b) {
-		frame.setVisible(b);
+		frmCarManagement.setVisible(b);
 	}
 
 	private void setTableData(List<Car> carList) {

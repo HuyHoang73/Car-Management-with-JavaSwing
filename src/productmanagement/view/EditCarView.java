@@ -56,6 +56,7 @@ public class EditCarView {
 		frmEditCar.setBounds(100, 100, 551, 370);
 		frmEditCar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEditCar.getContentPane().setLayout(null);
+		frmEditCar.setLocationRelativeTo(null);
 
 		labelTitleEdit = new JLabel("Edit Car");
 		labelTitleEdit.setFont(new Font("Tahoma", Font.PLAIN, 18));

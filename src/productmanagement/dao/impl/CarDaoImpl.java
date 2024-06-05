@@ -11,16 +11,14 @@ import productmanagement.utils.StringUtils;
 
 public class CarDaoImpl implements CarDao {
     private List<Car> carList;
-    private static final String FILE_NAME = "Car.txt";
+    private static final String FILE_NAME = "Car.bin";
     private static int currentId;
 
     public CarDaoImpl() {
         carList = new ArrayList<>();
         loadCarList();
-//        System.out.println(carList);
         if (!carList.isEmpty()) {
             currentId = carList.get(carList.size() - 1).getProduct_id();
-//            System.out.println(currentId);
         } else {
             currentId = 0;
         }
@@ -54,43 +52,7 @@ public class CarDaoImpl implements CarDao {
     public List<Car> getAllCars() {
         return new ArrayList<>(carList);
     }
-
-//    private void saveCarList() {
-//        try (OutputStream os = new FileOutputStream(FILE_NAME);
-//             ObjectOutputStream oos = new ObjectOutputStream(os)) {
-//            oos.writeObject(carList);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
     
-    private void saveCarList() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Car car : carList) {
-                writer.write(car.toString()); // Ghi dữ liệu của mỗi đối tượng Car dưới dạng văn bản
-                writer.newLine(); // Xuống dòng cho dòng tiếp theo
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadCarList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String data;
-            while ((data = reader.readLine()) != null) {
-                Car car = Car.fromStringToCar(data);
-                carList.add(car);
-            }
-        } catch (IOException e) {
-            carList = new ArrayList<>();
-        }
-    }
-    
-    private int generateId() {
-		return ++currentId;
-	}
-
 	@Override
 	public List<Car> searchCar(CarSearchDTO modelSearch) {
 		List<Car> result = new ArrayList<>();
@@ -138,6 +100,42 @@ public class CarDaoImpl implements CarDao {
 		});
 		System.out.println(result);
 		return result;
+	}
+
+//    private void saveCarList() {
+//        try (OutputStream os = new FileOutputStream(FILE_NAME);
+//             ObjectOutputStream oos = new ObjectOutputStream(os)) {
+//            oos.writeObject(carList);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
+    private void saveCarList() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (Car car : carList) {
+                writer.write(car.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadCarList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String data;
+            while ((data = reader.readLine()) != null) {
+                Car car = Car.fromStringToCar(data);
+                carList.add(car);
+            }
+        } catch (IOException e) {
+            carList = new ArrayList<>();
+        }
+    }
+    
+    private int generateId() {
+		return ++currentId;
 	}
 }
 

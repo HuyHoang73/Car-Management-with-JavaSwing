@@ -48,6 +48,7 @@ public class AddCarView {
 		frmAddCar.setBounds(100, 100, 551, 370);
 		frmAddCar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAddCar.getContentPane().setLayout(null);
+		frmAddCar.setLocationRelativeTo(null);
 		
 		JLabel labelTitleAdd = new JLabel("Add Car");
 		labelTitleAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
