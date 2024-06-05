@@ -1,0 +1,7 @@
+1,VF9,2000.0,10,8,Vinffast,red
+2,Ford Everest,1100.0,5,8,Ford,blue
+3,VF8,1400.0,15,7,Vinfast,black
+4,VF6,600.0,19,5,Vinfast,red
+5,VF9,2000.0,30,8,Vinfast,black
+6,Mazda CX-5,749.0,20,5,Mazda,white
+7,Ford Territory,822.0,17,7,Ford,white
