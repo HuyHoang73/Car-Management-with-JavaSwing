@@ -10,49 +10,57 @@ import productmanagement.model.entity.Car;
 import productmanagement.utils.StringUtils;
 
 public class CarDaoImpl implements CarDao {
-    private List<Car> carList;
-    private static final String FILE_NAME = "Car.bin";
-    private static int currentId;
+	private List<Car> carList;
+	private static final String FILE_NAME = "Car.bin";
+	private static int currentId;
 
-    public CarDaoImpl() {
-        carList = new ArrayList<>();
-        loadCarList();
-        if (!carList.isEmpty()) {
-            currentId = carList.get(carList.size() - 1).getProduct_id();
-        } else {
-            currentId = 0;
-        }
-    }
+	public CarDaoImpl() {
+		carList = loadCarList();
+		if (!carList.isEmpty()) {
+			currentId = carList.get(carList.size() - 1).getId();
+		} else {
+			currentId = 0;
+		}
+	}
 
-    @Override
-    public void addCar(Car car) {
-    	car.setProduct_id(generateId());
-        carList.add(car);
-        saveCarList();
-    }
+	@Override
+	public boolean addCar(Car car) {
+		car.setId(generateId());
+		if (carList.add(car)) {
+			saveCarList();
+			return true;
+		}
+		return false;
 
-    @Override
-    public void updateCar(Car car) {
-        for (int i = 0; i < carList.size(); i++) {
-            if (carList.get(i).getProduct_id() == car.getProduct_id()) {
-                carList.set(i, car);
-                saveCarList();
-                return;
-            }
-        }
-    }
+	}
 
-    @Override
-    public void deleteCar(int id) {
-        carList.removeIf(car -> car.getProduct_id() == id);
-        saveCarList();
-    }
+	@Override
+	public boolean updateCar(Car car) {
+		for (int i = 0; i < carList.size(); i++) {
+			if (carList.get(i).getId() == car.getId()) {
+				carList.set(i, car);
+				saveCarList();
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-    public List<Car> getAllCars() {
-        return new ArrayList<>(carList);
-    }
-    
+	@Override
+	public boolean deleteCar(int id) {
+		if (carList.removeIf(car -> car.getId() == id)) {
+			saveCarList();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Car> getAllCars() {
+		List<Car> result = loadCarList();
+		return result;
+	}
+
 	@Override
 	public List<Car> searchCar(CarSearchDTO modelSearch) {
 		List<Car> result = new ArrayList<>();
@@ -60,37 +68,37 @@ public class CarDaoImpl implements CarDao {
 		carList.forEach(item -> {
 			boolean flag = true;
 			if (StringUtils.checkString(modelSearch.getName())) {
-				if(!item.getProduct_name().equalsIgnoreCase(modelSearch.getName())){
+				if (!item.getName().equalsIgnoreCase(modelSearch.getName())) {
 					flag = false;
 				}
 			}
 			if (modelSearch.getMinPrice() != -1.0) {
-				if(item.getProduct_price() < modelSearch.getMinPrice()) {
+				if (item.getPrice() < modelSearch.getMinPrice()) {
 					flag = false;
 				}
 			}
 			if (modelSearch.getMaxPrice() != -1.0) {
-				if(item.getProduct_price() > modelSearch.getMaxPrice()) {
+				if (item.getPrice() > modelSearch.getMaxPrice()) {
 					flag = false;
 				}
 			}
 			if (modelSearch.getMinSeats() != -1) {
-				if(item.getNumberOfSeats() < modelSearch.getMinSeats()) {
+				if (item.getNumberOfSeats() < modelSearch.getMinSeats()) {
 					flag = false;
 				}
 			}
 			if (modelSearch.getMaxSeats() != -1) {
-				if(item.getNumberOfSeats() > modelSearch.getMaxSeats()) {
+				if (item.getNumberOfSeats() > modelSearch.getMaxSeats()) {
 					flag = false;
 				}
 			}
-			if (StringUtils.checkString(modelSearch.getManufacturer())) {
-				if( !item.getManufacturer().equalsIgnoreCase(modelSearch.getManufacturer())) {
+			if (StringUtils.checkString(modelSearch.getTypeCar())) {
+				if (!item.getTypeCar().equalsIgnoreCase(modelSearch.getTypeCar())) {
 					flag = false;
 				}
 			}
 			if (StringUtils.checkString(modelSearch.getColor())) {
-				if(!item.getColor().equalsIgnoreCase(modelSearch.getColor())) {
+				if (!item.getColor().equalsIgnoreCase(modelSearch.getColor())) {
 					flag = false;
 				}
 			}
@@ -98,7 +106,6 @@ public class CarDaoImpl implements CarDao {
 				result.add(item);
 			}
 		});
-		System.out.println(result);
 		return result;
 	}
 
@@ -110,32 +117,45 @@ public class CarDaoImpl implements CarDao {
 //            e.printStackTrace();
 //        }
 //    }
-    
-    private void saveCarList() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Car car : carList) {
-                writer.write(car.toString());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void loadCarList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String data;
-            while ((data = reader.readLine()) != null) {
-                Car car = Car.fromStringToCar(data);
-                carList.add(car);
-            }
-        } catch (IOException e) {
-            carList = new ArrayList<>();
-        }
-    }
-    
-    private int generateId() {
+	private void saveCarList() {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+			for (Car car : carList) {
+				writer.write(car.toString());
+				writer.newLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private List<Car> loadCarList() {
+		List<Car> carList = new ArrayList<Car>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+			String data;
+			while ((data = reader.readLine()) != null) {
+				Car car = Car.fromStringToCar(data);
+				carList.add(car);
+			}
+			return carList;
+		} catch (IOException e) {
+			carList = new ArrayList<>();
+		}
+		return carList;
+	}
+
+	private int generateId() {
 		return ++currentId;
 	}
-}
 
+	@Override
+	public Car searchCarById(int id) {
+		Car c = new Car();
+		for (int i = 0; i < carList.size(); i++) {
+			if (carList.get(i).getId() == id) {
+				c = carList.get(i);
+			}
+		}
+		return c;
+	}
+}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import productmanagement.dao.CarDao;
 import productmanagement.dao.impl.CarDaoImpl;
+import productmanagement.model.dto.CarAddDTO;
 import productmanagement.model.dto.CarSearchDTO;
 import productmanagement.model.entity.Car;
 import productmanagement.services.CarManager;
@@ -12,33 +13,45 @@ public class CarManagerImpl implements CarManager {
 	private CarDao carDao = new CarDaoImpl();
 
 	@Override
-	public void addCar(Car c) {
-		carDao.addCar(c);
-		//return carList.add(c);
+	public boolean addCar(CarAddDTO c) {
+		Car car = new Car();
+		car.setName(c.getName());
+		car.setNumberOfSeats(c.getNumberOfSeats());
+		car.setPrice(c.getPrice());
+		car.setTypeCar(c.getTypeCar());
+		car.setSize(c.getLength() + "-" + c.getWidth() + "-" + c.getHeight());
+		car.setMomen(c.getMomen());
+		car.setWattage(c.getWattage());
+		car.setDescription(c.getDescription());
+		car.setNumberOfAirBag(c.getNumberOfAirBag());
+		car.setTotal(c.getTotal());
+		car.setVersion(c.getVersion());
+		car.setColor(c.getColor());
+		return carDao.addCar(car);
 	}
 
 	@Override
-	public void editCar(Car c) {
-//		for (int i = 0; i < carList.size(); i++) {
-//			if (carList.get(i).getProduct_id() == c.getProduct_id()) {
-//				carList.set(i, c);
-//				return true;
-//			}
-//		}
-//		return false;
-		carDao.updateCar(c);
+	public boolean editCar(CarAddDTO c) {
+		Car car = new Car();
+		car.setId(c.getId());
+		car.setName(c.getName());
+		car.setNumberOfSeats(c.getNumberOfSeats());
+		car.setPrice(c.getPrice());
+		car.setTypeCar(c.getTypeCar());
+		car.setSize(c.getLength() + "-" + c.getWidth() + "-" + c.getHeight());
+		car.setMomen(c.getMomen());
+		car.setWattage(c.getWattage());
+		car.setDescription(c.getDescription());
+		car.setNumberOfAirBag(c.getNumberOfAirBag());
+		car.setTotal(c.getTotal());
+		car.setVersion(c.getVersion());
+		car.setColor(c.getColor());
+		return carDao.updateCar(car);
 	}
 
 	@Override
-	public void delCar(int id) {
-//		for (int i = 0; i < carList.size(); i++) {
-//			if (carList.get(i).getProduct_id() == id) {
-//				carList.remove(i);
-//				return true;
-//			}
-//		}
-//		return false;
-		carDao.deleteCar(id);
+	public boolean delCar(int id) {
+		return carDao.deleteCar(id);
 	}
 
 	@Override
@@ -50,14 +63,14 @@ public class CarManagerImpl implements CarManager {
 	@Override
 	public List<Car> sortedCar() {
 		List<Car> carList = carDao.getAllCars();
-		carList.sort((c1, c2) -> Double.compare(c2.getProduct_id(), c1.getProduct_id()));
+		carList.sort((c1, c2) -> Double.compare(c2.getId(), c1.getId()));
 		return carList;
 	}
 
 	@Override
 	public List<Car> sortedCarByPrice() {
 		List<Car> carList = carDao.getAllCars();
-		carList.sort((c1, c2) -> Double.compare(c1.getProduct_price(), c2.getProduct_price()));
+		carList.sort((c1, c2) -> Double.compare(c1.getPrice(), c2.getPrice()));
 		return carList;
 	}
 
@@ -71,5 +84,10 @@ public class CarManagerImpl implements CarManager {
 	@Override
 	public List<Car> getAllCars() {
 		return carDao.getAllCars();
+	}
+
+	@Override
+	public Car searchCarById(int id) {
+		return carDao.searchCarById(id);
 	}
 }

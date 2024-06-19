@@ -6,7 +6,7 @@ public class CarSearchDTO {
 	private Double maxPrice;
 	private Integer minSeats;
 	private Integer maxSeats;
-	private String manufacturer;
+	private String typeCar;
 	private String color;
 	
 	public CarSearchDTO() {
@@ -15,7 +15,7 @@ public class CarSearchDTO {
 		this.maxPrice = -1.0;
 		this.minSeats = -1;
 		this.maxSeats = -1;
-		this.manufacturer = "";
+		this.typeCar = "";
 		this.color = "";
 	}
 
@@ -26,7 +26,7 @@ public class CarSearchDTO {
 		this.maxPrice = maxPrice;
 		this.minSeats = minSeats;
 		this.maxSeats = maxSeats;
-		this.manufacturer = manufacturer;
+		this.typeCar = manufacturer;
 		this.color = color;
 	}
 
@@ -51,8 +51,8 @@ public class CarSearchDTO {
 		return maxSeats;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
+	public String getTypeCar() {
+		return typeCar;
 	}
 
 	public String getColor() {
@@ -79,8 +79,8 @@ public class CarSearchDTO {
 		this.maxSeats = maxSeats;
 	}
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
+	public void setTypeCar(String typeCar) {
+		this.typeCar = typeCar;
 	}
 
 	public void setColor(String color) {
@@ -90,6 +90,6 @@ public class CarSearchDTO {
 	@Override
 	public String toString() {
 		return "CarSearchDTO [name=" + name + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", minSeats="
-				+ minSeats + ", maxSeats=" + maxSeats + ", manufacturer=" + manufacturer + ", color=" + color + "]";
+				+ minSeats + ", maxSeats=" + maxSeats + ", manufacturer=" + typeCar + ", color=" + color + "]";
 	}
 }

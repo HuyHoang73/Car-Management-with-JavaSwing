@@ -1,8 +1,4 @@
-1,VF9,2000.0,20,8,Vinfast,red
-2,Ford Everest,1100.0,5,8,Ford,blue
-3,VF8,1400.0,15,7,Vinfast,black
-4,VF6,600.0,19,5,Vinfast,red
-5,VF9,2000.0,30,8,Vinfast,black
-6,Mazda CX-5,749.0,20,5,Mazda,white
-7,Ford Territory,822.0,17,7,Ford,white
-8,Fortuner,1020.0,25,7,Toyota,black
+1,VF9,1,1.0,Xe điện,11.0-1.0-1.0,1.0,1,1,1,1,11,1
+2,2,2,2.0,Xe xăng,2.0-2.0-2.0,2.0,2,2,2,2,2,2
+3,3,3,3.0,Xe xăng,3.0-3.0-3.0,3.0,3,3,3,3,3,3
+4,4,4,4.0,Xe xăng,4.0-4.0-4.0,4.0,4,4,4,4,4,5
