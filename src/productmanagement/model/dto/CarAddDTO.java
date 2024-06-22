@@ -16,9 +16,9 @@ public class CarAddDTO {
 	private int total;
 	private String version;
 	private String color;
-	
+
 	public CarAddDTO() {
-		
+
 	}
 
 	public CarAddDTO(int id, String name, int numberOfSeats, double price, String typeCar, double length, double width,
@@ -160,6 +160,6 @@ public class CarAddDTO {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-	
+
+
 }

@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> searchUser(String name) {
-		return userDao.searchUser(name);
+	public List<User> searchUser(String name, boolean choice) {
+		return userDao.searchUser(name, choice);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User searchUserById(int id) {
 		return userDao.searchUserById(id);
+	}
+
+	@Override
+	public boolean restoreUser(int id) {
+		return userDao.restoreUser(id);
 	}
 
 }

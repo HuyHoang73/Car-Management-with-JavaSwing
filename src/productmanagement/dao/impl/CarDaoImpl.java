@@ -1,6 +1,10 @@
 package productmanagement.dao.impl;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,6 @@ public class CarDaoImpl implements CarDao {
 			return true;
 		}
 		return false;
-
 	}
 
 	@Override
@@ -130,14 +133,13 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	private List<Car> loadCarList() {
-		List<Car> carList = new ArrayList<Car>();
+		List<Car> carList = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
 			String data;
 			while ((data = reader.readLine()) != null) {
 				Car car = Car.fromStringToCar(data);
 				carList.add(car);
 			}
-			return carList;
 		} catch (IOException e) {
 			carList = new ArrayList<>();
 		}
@@ -151,9 +153,9 @@ public class CarDaoImpl implements CarDao {
 	@Override
 	public Car searchCarById(int id) {
 		Car c = new Car();
-		for (int i = 0; i < carList.size(); i++) {
-			if (carList.get(i).getId() == id) {
-				c = carList.get(i);
+		for (Car element : carList) {
+			if (element.getId() == id) {
+				c = element;
 			}
 		}
 		return c;

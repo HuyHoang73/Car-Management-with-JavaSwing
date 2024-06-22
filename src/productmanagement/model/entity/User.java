@@ -7,18 +7,20 @@ public class User {
 	private String phoneNumber;
 	private String password;
 	private int status;
+	private int roleId;
 
 	public User() {
 
 	}
 
-	public User(int id, String fullName, String gmail, String phoneNumber, String password, int status) {
+	public User(int id, String fullName, String gmail, String phoneNumber, String password, int status, int roleId) {
 		this.id = id;
 		this.fullName = fullName;
 		this.gmail = gmail;
 		this.phoneNumber = phoneNumber;
 		this.password = password;
 		this.status = status;
+		this.roleId = roleId;
 	}
 
 	public int getId() {
@@ -60,7 +62,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public int getStatus() {
 		return status;
 	}
@@ -69,11 +71,19 @@ public class User {
 		this.status = status;
 	}
 
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
 	@Override
 	public String toString() {
-		return id + "," + fullName + "," + gmail + "," + phoneNumber + "," + password + "," + status;
+		return id + "," + fullName + "," + gmail + "," + phoneNumber + "," + password + "," + status + "," + roleId;
 	}
-	
+
 	public static User fromStringToUser(String str) {
         String[] parts = str.split(",");
         int id = Integer.parseInt(parts[0]);
@@ -82,8 +92,9 @@ public class User {
         String phoneNumber = parts[3];
         String password = parts[4];
         int status = Integer.parseInt(parts[5]);
-        return new User(id, fullName, gmail, phoneNumber, password, status);
+        int roleId = Integer.parseInt(parts[6]);
+        return new User(id, fullName, gmail, phoneNumber, password, status, roleId);
     }
-	
-	
+
+
 }

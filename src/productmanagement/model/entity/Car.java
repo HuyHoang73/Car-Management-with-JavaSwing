@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Car implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
@@ -22,7 +22,7 @@ public class Car implements Serializable{
 	private String color;
 
 	public Car() {
-		
+
 	}
 
 	public Car(int id, String name, int numberOfSeats, double price, String typeCar, String size, double momen,
@@ -142,7 +142,7 @@ public class Car implements Serializable{
 	public String toString() {
 		return id + "," + name + "," + numberOfSeats + "," + price + "," + typeCar + "," + size + "," + momen + "," + wattage + "," + description + "," + numberOfAirBag + "," + total + "," + version + "," + color;
 	}
-	
+
 	public String getColor() {
 		return color;
 	}
@@ -168,5 +168,5 @@ public class Car implements Serializable{
         String color = parts[12];
         return new Car(id, name, numberOfSeats, price, typeCar, size, momen, wattage, description, numberOfAirBag, total, version, color);
     }
-	
+
 }

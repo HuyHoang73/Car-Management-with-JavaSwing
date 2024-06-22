@@ -12,16 +12,18 @@ public interface CarManager {
 	public boolean editCar(CarAddDTO c);
 
 	public boolean delCar(int id);
-	
+
 	public List<Car> searchCar(CarSearchDTO modelSearch);
-	
+
 	public List<Car> sortedCar();
-	
+
 	public List<Car> sortedCarByPrice();
-	
+
 	public List<Car> sortedCarByNumberOfSeats();
-	
+
 	List<Car> getAllCars();
-	
+
 	Car searchCarById(int id);
+
+	int statisticsTotal();
 }

@@ -3,13 +3,13 @@ package productmanagement.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AdminSidebarView extends JPanel {
 
@@ -31,6 +31,7 @@ public class AdminSidebarView extends JPanel {
 
 		JButton btnNavigateDashboard = new JButton("Dashboard");
 		btnNavigateDashboard.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel adminDashboard = new AdminDashboardView();
 				navigate.navigateTo(adminDashboard);
@@ -44,6 +45,7 @@ public class AdminSidebarView extends JPanel {
 
 		JButton btnNavigateCar = new JButton("Ô tô");
 		btnNavigateCar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel adminCar = new AdminCarView();
 				navigate.navigateTo(adminCar);
@@ -58,6 +60,7 @@ public class AdminSidebarView extends JPanel {
 
 		JButton btnNavigateUser = new JButton("Tài khoản");
 		btnNavigateUser.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel adminUser = new AdminUserView();
 				navigate.navigateTo(adminUser);
@@ -79,6 +82,14 @@ public class AdminSidebarView extends JPanel {
 		add(btnNavigateShowroom);
 
 		JButton btnNavigateBank = new JButton("Ngân hàng");
+		btnNavigateBank.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel adminBank = new AdminBankView();
+				navigate.navigateTo(adminBank
+						);
+			}
+		});
 		btnNavigateBank.setForeground(new Color(255, 255, 255));
 		btnNavigateBank.setBackground(new Color(102, 51, 204));
 		btnNavigateBank.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -88,6 +99,7 @@ public class AdminSidebarView extends JPanel {
 
 		JButton btnSettings = new JButton("Cài đặt");
 		btnSettings.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel adminSettings = new AdminSettingsView();
 				navigate.navigateTo(adminSettings);
@@ -105,7 +117,7 @@ public class AdminSidebarView extends JPanel {
 	public Dimension getPreferredSize() {
 		return new Dimension(200, 0); // Đặt kích thước chiều rộng mặc định cho sidebar
 	}
-	
+
 	public static JPanel getPage(JPanel page) {
 		return page;
 	}

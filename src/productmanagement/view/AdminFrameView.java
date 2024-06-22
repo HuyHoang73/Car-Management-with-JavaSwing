@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class AdminFrameView implements Navigate {
 
@@ -27,6 +28,7 @@ public class AdminFrameView implements Navigate {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					AdminFrameView window = new AdminFrameView();
@@ -53,9 +55,9 @@ public class AdminFrameView implements Navigate {
 		frame.setResizable(false);
 		frame.setTitle("Trang quản trị");
 		frame.setBounds(100, 100, 1316, 790);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		
+
 		contentPanel = new JPanel();
         cardLayout = new CardLayout();
         contentPanel.setLayout(cardLayout);
@@ -66,7 +68,7 @@ public class AdminFrameView implements Navigate {
         frame.getContentPane().add(contentPanel, BorderLayout.CENTER);
         showDefaultPage();
 	}
-	
+
 	private void showDefaultPage() {
 		JPanel dashboardPanel = new AdminDashboardView();
         contentPanel.add(dashboardPanel, "Default");

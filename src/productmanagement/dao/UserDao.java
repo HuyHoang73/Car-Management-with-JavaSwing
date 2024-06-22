@@ -11,13 +11,15 @@ public interface UserDao {
 
 	boolean deleteUser(int id);
 
+	boolean restoreUser(int id);
+
 	List<User> getAllUsers();
-	
+
 	List<User> getAllUsersActive();
-	
+
 	List<User> getAllUsersDisable();
 
-	List<User> searchUser(String name);
+	List<User> searchUser(String name, boolean choice);
 
 	User searchUserById(int id);
 }

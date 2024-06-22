@@ -8,7 +8,7 @@ public class CarSearchDTO {
 	private Integer maxSeats;
 	private String typeCar;
 	private String color;
-	
+
 	public CarSearchDTO() {
 		this.name = "";
 		this.minPrice = -1.0;

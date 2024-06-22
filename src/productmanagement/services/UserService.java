@@ -11,7 +11,9 @@ public interface UserService {
 
 	boolean deleteUser(int id);
 
-	public List<User> searchUser(String name);
+	boolean restoreUser(int id);
+
+	public List<User> searchUser(String name, boolean choice);
 
 	List<User> getAllUsersActive();
 

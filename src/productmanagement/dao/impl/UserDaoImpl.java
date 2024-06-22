@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao{
 	private List<User> userList;
 	private static final String FILE_NAME = "User.bin";
 	private static int currentId;
-	
+
 	public UserDaoImpl() {
 		userList = loadUserList();
 		if (!userList.isEmpty()) {
@@ -49,9 +49,28 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public boolean deleteUser(int id) {
-		if (userList.removeIf(user -> user.getId() == id)) {
-			saveUserList();
-			return true;
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getId() == id) {
+				User user = userList.get(i);
+				user.setStatus(0);
+				userList.set(i, user);
+				saveUserList();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean restoreUser(int id) {
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getId() == id) {
+				User user = userList.get(i);
+				user.setStatus(1);
+				userList.set(i, user);
+				saveUserList();
+				return true;
+			}
 		}
 		return false;
 	}
@@ -61,11 +80,11 @@ public class UserDaoImpl implements UserDao{
 		List<User> result = loadUserList();
 		return result;
 	}
-	
+
 	@Override
 	public List<User> getAllUsersActive() {
 		List<User> userList = loadUserList();
-		List<User> result = new ArrayList<User>();
+		List<User> result = new ArrayList<>();
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getStatus() == 1) {
 				result.add(userList.get(i));
@@ -77,7 +96,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public List<User> getAllUsersDisable() {
 		List<User> userList = loadUserList();
-		List<User> result = new ArrayList<User>();
+		List<User> result = new ArrayList<>();
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getStatus() == 0) {
 				result.add(userList.get(i));
@@ -87,11 +106,19 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public List<User> searchUser(String name) {
-		List<User> result = new ArrayList<User>();
-		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getFullName().toLowerCase().contains(name.toLowerCase())) {
-				result.add(userList.get(i));
+	public List<User> searchUser(String name, boolean choice) {
+		List<User> result = new ArrayList<>();
+		if(choice) {
+			for (int i = 0; i < userList.size(); i++) {
+				if (userList.get(i).getFullName().toLowerCase().contains(name.toLowerCase()) && userList.get(i).getStatus() == 1) {
+					result.add(userList.get(i));
+				}
+			}
+		} else {
+			for (int i = 0; i < userList.size(); i++) {
+				if (userList.get(i).getFullName().toLowerCase().contains(name.toLowerCase()) && userList.get(i).getStatus() == 0) {
+					result.add(userList.get(i));
+				}
 			}
 		}
 		return result;
@@ -100,14 +127,14 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User searchUserById(int id) {
 		User user = new User();
-		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getId() == id) {
-				user = userList.get(i);
+		for (User element : userList) {
+			if (element.getId() == id) {
+				user = element;
 			}
 		}
 		return user;
 	}
-	
+
 	private void saveUserList() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
 			for (User user : userList) {
@@ -120,14 +147,13 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	private List<User> loadUserList() {
-		List<User> userList = new ArrayList<User>();
+		List<User> userList = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
 			String data;
 			while ((data = reader.readLine()) != null) {
 				User user = User.fromStringToUser(data);
 				userList.add(user);
 			}
-			return userList;
 		} catch (IOException e) {
 			userList = new ArrayList<>();
 		}
@@ -137,4 +163,5 @@ public class UserDaoImpl implements UserDao{
 	private int generateId() {
 		return ++currentId;
 	}
+
 }

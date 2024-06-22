@@ -90,4 +90,14 @@ public class CarManagerImpl implements CarManager {
 	public Car searchCarById(int id) {
 		return carDao.searchCarById(id);
 	}
+
+	@Override
+	public int statisticsTotal() {
+		List<Car> carList = carDao.getAllCars();
+		int totalCar = 0;
+		for (Car element : carList) {
+			totalCar += element.getTotal();
+		}
+		return totalCar;
+	}
 }
