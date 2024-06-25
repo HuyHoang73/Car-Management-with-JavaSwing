@@ -160,4 +160,13 @@ public class CarDaoImpl implements CarDao {
 		}
 		return c;
 	}
+	
+	@Override
+	public List<String> getAllCarNames(){
+        List<String> carNames = new ArrayList<>();
+        for (Car car : carList) {
+            carNames.add(car.getName());
+        }
+        return carNames;
+    }
 }

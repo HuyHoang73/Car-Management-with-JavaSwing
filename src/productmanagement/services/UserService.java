@@ -22,4 +22,10 @@ public interface UserService {
 	List<User> getAllUser();
 
 	User searchUserById(int id);
+	
+	User searchUserByGmail(String gmail);
+	
+	int authenticate(String gmail, String password);
+	
+	boolean isUserExists(String gmail);
 }

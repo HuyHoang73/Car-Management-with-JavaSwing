@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import productmanagement.model.entity.User;
+import javax.swing.border.LineBorder;
+
 public class AdminSidebarView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +21,7 @@ public class AdminSidebarView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdminSidebarView(Navigate navigate) {
+	public AdminSidebarView(Navigate navigate, User user) {
 		setBackground(new Color(102, 51, 204));
 		setLayout(null);
 
@@ -101,16 +104,31 @@ public class AdminSidebarView extends JPanel {
 		btnSettings.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanel adminSettings = new AdminSettingsView();
+				JPanel adminSettings = new AdminSettingsView(navigate, user);
 				navigate.navigateTo(adminSettings);
 			}
 		});
-		btnSettings.setForeground(new Color(102, 51, 204));
+		btnSettings.setForeground(new Color(255, 255, 255));
 		btnSettings.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnSettings.setBackground(new Color(255, 255, 255));
+		btnSettings.setBackground(new Color(102, 51, 204));
 		btnSettings.setToolTipText("Cài đặt");
 		btnSettings.setBounds(10, 291, 180, 35);
 		add(btnSettings);
+		
+		JButton btnLogout = new JButton("Đăng xuất");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginView loginView = new LoginView();
+				loginView.setVisible(true);
+				navigate.logout();
+			}
+		});
+		btnLogout.setForeground(new Color(102, 51, 204));
+		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLogout.setBorder(new LineBorder(new Color(102, 51, 204), 2));
+		btnLogout.setBackground(Color.WHITE);
+		btnLogout.setBounds(10, 337, 180, 35);
+		add(btnLogout);
 	}
 
 	@Override

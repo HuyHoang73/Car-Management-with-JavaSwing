@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import productmanagement.SystemConstant;
 import productmanagement.dao.UserDao;
 import productmanagement.model.entity.User;
+import productmanagement.utils.CipherUtils;
 
 public class UserDaoImpl implements UserDao{
 	private List<User> userList;
@@ -130,10 +132,43 @@ public class UserDaoImpl implements UserDao{
 		for (User element : userList) {
 			if (element.getId() == id) {
 				user = element;
+				return user;
 			}
 		}
-		return user;
+		return null;
 	}
+	
+	@Override
+    public boolean isUserExists(String gmail) {
+        for (User user : userList) {
+            if (user.getGmail().equals(gmail)) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	@Override
+    public boolean authenticate(String gmail, String password) {
+        byte[] key = CipherUtils.hexStringToByteArray(SystemConstant.getHexkey());
+        for (User user : userList) {
+        	String passwordDecypted = CipherUtils.decrypt(user.getPassword(), key);
+            if (user.getGmail().equals(gmail) && password.equals(passwordDecypted)) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	@Override
+    public User getUserByEmail(String email) {
+        for (User user : userList) {
+            if (user.getGmail().equals(email)) {
+                return user;
+            }
+        }
+        return null; // Trả về null nếu không tìm thấy user với email tương ứng
+    }
 
 	private void saveUserList() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
@@ -145,7 +180,11 @@ public class UserDaoImpl implements UserDao{
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Phương thức này để đọc dữ liệu từ trong file
+	 * @return danh sách các tài khoản trong hệ thống
+	 */
 	private List<User> loadUserList() {
 		List<User> userList = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {

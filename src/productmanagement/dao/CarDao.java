@@ -17,5 +17,7 @@ public interface CarDao {
     List<Car> searchCar(CarSearchDTO modelSearch);
 
     Car searchCarById(int id);
+    
+    public List<String> getAllCarNames();
 }
 

@@ -1,6 +1,9 @@
 package productmanagement.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JComboBox;
 
 import productmanagement.dao.CarDao;
 import productmanagement.dao.impl.CarDaoImpl;
@@ -100,4 +103,45 @@ public class CarManagerImpl implements CarManager {
 		}
 		return totalCar;
 	}
+	
+	@Override
+	public boolean isCarExists(String carName) {
+		for (Car car : carDao.getAllCars()) {
+            if (car.getName().equals(carName)) {
+                return true;
+            }
+        }
+        return false;
+	}
+	
+	@Override
+	public List<String> getAllCarNames(List<Car> carList){
+        List<String> carNames = new ArrayList<>();
+        for (Car car : carList) {
+            carNames.add(car.getName());
+        }
+        return carNames;
+    }
+	
+	@Override
+	public void loadCarNamesToComboBox(JComboBox<String> comboBox) {
+        try {
+            List<String> carNames = carDao.getAllCarNames();
+            for (String name : carNames) {
+                comboBox.addItem(name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	@Override
+	public Car getCarByName(String name) {
+        for (Car car : carDao.getAllCars()) {
+            if (car.getName().equals(name)) {
+                return car;
+            }
+        }
+        return null;
+    }
 }

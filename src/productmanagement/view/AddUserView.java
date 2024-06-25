@@ -19,6 +19,7 @@ import productmanagement.SystemConstant;
 import productmanagement.model.entity.User;
 import productmanagement.services.UserService;
 import productmanagement.services.impl.UserServiceImpl;
+import productmanagement.utils.CipherUtils;
 
 public class AddUserView extends JDialog {
 
@@ -112,7 +113,9 @@ public class AddUserView extends JDialog {
 				String gmail = txtAddGmail.getText().trim();
 				String phoneNumber = txtAddPhoneNumber.getText().trim();
 				int status = SystemConstant.getDefaultStatus();
-				String password = SystemConstant.getDefaultPassword();
+				byte[] key = CipherUtils.hexStringToByteArray(SystemConstant.getHexkey());
+				String password = CipherUtils.encrypt(SystemConstant.getDefaultPassword(), key);
+				System.out.println(password);
 				int index = comboBoxAddRole.getSelectedIndex();
 				System.out.println(index);
 				int roleId = 1;

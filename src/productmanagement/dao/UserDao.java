@@ -22,4 +22,10 @@ public interface UserDao {
 	List<User> searchUser(String name, boolean choice);
 
 	User searchUserById(int id);
+	
+	boolean isUserExists(String gmail);
+	
+	boolean authenticate(String gmail, String password);
+	
+	User getUserByEmail(String email);
 }

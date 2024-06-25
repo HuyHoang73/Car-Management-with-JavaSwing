@@ -8,8 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import productmanagement.services.BankService;
 import productmanagement.services.CarManager;
 import productmanagement.services.UserService;
+import productmanagement.services.impl.BankServiceImpl;
 import productmanagement.services.impl.CarManagerImpl;
 import productmanagement.services.impl.UserServiceImpl;
 
@@ -18,6 +20,7 @@ public class AdminDashboardView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private CarManager carManager;
 	private UserService userService;
+	private BankService bankService;
 
 	/**
 	 * Create the panel.
@@ -25,6 +28,7 @@ public class AdminDashboardView extends JPanel {
 	public AdminDashboardView() {
 		carManager = new CarManagerImpl();
 		userService = new UserServiceImpl();
+		bankService = new BankServiceImpl();
 
 		setLayout(null);
 
@@ -80,14 +84,14 @@ public class AdminDashboardView extends JPanel {
 		panel.add(boxItemDashboard3);
 		boxItemDashboard3.setLayout(null);
 
-		JLabel lblAdminDashboardShowroom = new JLabel("Tổng số showroom");
+		JLabel lblAdminDashboardShowroom = new JLabel("Số ngân hàng liên kết");
 		lblAdminDashboardShowroom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdminDashboardShowroom.setForeground(Color.WHITE);
 		lblAdminDashboardShowroom.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAdminDashboardShowroom.setBounds(10, 11, 179, 35);
 		boxItemDashboard3.add(lblAdminDashboardShowroom);
 
-		JLabel lblDashboardShowroomTotal = new JLabel("1400");
+		JLabel lblDashboardShowroomTotal = new JLabel(String.valueOf(bankService.getAllBanks().size()));
 		lblDashboardShowroomTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDashboardShowroomTotal.setForeground(Color.WHITE);
 		lblDashboardShowroomTotal.setFont(new Font("Tahoma", Font.BOLD, 40));

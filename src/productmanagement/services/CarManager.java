@@ -2,6 +2,8 @@ package productmanagement.services;
 
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import productmanagement.model.dto.CarAddDTO;
 import productmanagement.model.dto.CarSearchDTO;
 import productmanagement.model.entity.Car;
@@ -26,4 +28,12 @@ public interface CarManager {
 	Car searchCarById(int id);
 
 	int statisticsTotal();
+	
+	public boolean isCarExists(String carName);
+	
+	public List<String> getAllCarNames(List<Car> carList);
+	
+	void loadCarNamesToComboBox(JComboBox<String> comboBox);
+	
+	Car getCarByName(String name);
 }

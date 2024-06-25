@@ -2,18 +2,19 @@ package productmanagement.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class AdminFrameView implements Navigate {
+import productmanagement.model.entity.User;
 
+public class AdminFrameView implements Navigate {
 	private JFrame frame;
 	private JPanel contentPanel;
     private CardLayout cardLayout;
     private JPanel currentPage;
+    private User user;
 
 	public JPanel getCurrentPage() {
 		return currentPage;
@@ -23,27 +24,28 @@ public class AdminFrameView implements Navigate {
 		this.currentPage = currentPage;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					AdminFrameView window = new AdminFrameView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					AdminFrameView window = new AdminFrameView();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public AdminFrameView() {
+	public AdminFrameView(User user) {
+		this.user = user;
 		initialize();
 	}
 
@@ -62,7 +64,7 @@ public class AdminFrameView implements Navigate {
         cardLayout = new CardLayout();
         contentPanel.setLayout(cardLayout);
 
-		AdminSidebarView sidebar = new AdminSidebarView(this);
+		AdminSidebarView sidebar = new AdminSidebarView(this, user);
 		frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(sidebar, BorderLayout.WEST);
         frame.getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -83,6 +85,12 @@ public class AdminFrameView implements Navigate {
 
 	public void setVisible(boolean b) {
 		frame.setVisible(b);
+	}
+
+	@Override
+	public void logout() {
+		frame.dispose();
+		
 	}
 
 }
