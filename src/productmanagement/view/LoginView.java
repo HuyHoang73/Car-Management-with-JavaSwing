@@ -138,8 +138,8 @@ public class LoginView extends JFrame {
 		btnSignUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Hiển thị frame đăng ký khi nhấn nút Sign Up
-//                SignUpView signUpFrame = new SignUpView();
-//                signUpFrame.setVisible(true);
+                SignUpView signUpFrame = new SignUpView();
+                signUpFrame.setVisible(true);
                 dispose();
 			}
 		});

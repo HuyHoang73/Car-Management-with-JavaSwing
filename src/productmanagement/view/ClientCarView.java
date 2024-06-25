@@ -133,10 +133,10 @@ public class ClientCarView extends JFrame {
 		List<Car> carList = carManager.getAllCars();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ID");
-		model.addColumn("Name");
-		model.addColumn("Number of seat");
-		model.addColumn("Price");
-		model.addColumn("Version");
+		model.addColumn("Tên xe");
+		model.addColumn("Số chỗ ngồi");
+		model.addColumn("Giá bán");
+		model.addColumn("Phiên bản");
 
 		model.setRowCount(0);
 		carList.forEach(item -> {

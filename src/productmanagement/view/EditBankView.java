@@ -97,7 +97,7 @@ public class EditBankView extends JDialog {
 					bank.setId(bankId);
 					bank.setName(name);
 					bank.setFee(Double.parseDouble(fee));
-					if(bankService.addBank(bank)) {
+					if(bankService.editBank(bank)) {
 						JOptionPane.showMessageDialog(contentPanel, "Thành công", "Message", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						JOptionPane.showMessageDialog(contentPanel, "Thất bại", "Error", JOptionPane.ERROR_MESSAGE);

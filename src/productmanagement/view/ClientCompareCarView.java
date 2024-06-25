@@ -35,6 +35,7 @@ public class ClientCompareCarView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ClientCompareCarView() {
 		try {
 			carManager = new CarManagerImpl();
@@ -42,7 +43,7 @@ public class ClientCompareCarView extends JFrame {
 			e.printStackTrace();
 		}
 
-		setTitle("Compare Screen");
+		setTitle("So sánh xe");
 		setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -53,6 +54,7 @@ public class ClientCompareCarView extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 
 		JLabel lblNewLabel = new JLabel("So sánh xe ");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -141,19 +143,19 @@ public class ClientCompareCarView extends JFrame {
 		Car car2 = carManager.getCarByName(selectedCarName2);
 
 		String[][] data = {
-				{ "Number of seat", car1 != null ? String.valueOf(car1.getNumberOfSeats()) : "",
+				{ "Số chỗ ngồi", car1 != null ? String.valueOf(car1.getNumberOfSeats()) : "",
 						car2 != null ? String.valueOf(car2.getNumberOfSeats()) : "" },
-				{ "Price", car1 != null ? String.valueOf(car1.getPrice()) : "",
+				{ "Giá bán", car1 != null ? String.valueOf(car1.getPrice()) : "",
 						car2 != null ? String.valueOf(car2.getPrice()) : "" },
 				{ "Momen", car1 != null ? String.valueOf(car1.getMomen()) : "",
 						car2 != null ? String.valueOf(car2.getMomen()) : "" },
-				{ "Wattage", car1 != null ? String.valueOf(car1.getWattage()) : "",
+				{ "Công suất", car1 != null ? String.valueOf(car1.getWattage()) : "",
 						car2 != null ? String.valueOf(car2.getWattage()) : "" },
-				{ "Numner of air bag", car1 != null ? String.valueOf(car1.getNumberOfAirBag()) : "",
+				{ "Số túi khí", car1 != null ? String.valueOf(car1.getNumberOfAirBag()) : "",
 						car2 != null ? String.valueOf(car2.getNumberOfAirBag()) : "" },
-				{ "Total", car1 != null ? String.valueOf(car1.getTotal()) : "",
+				{ "Số lượng còn lại", car1 != null ? String.valueOf(car1.getTotal()) : "",
 						car2 != null ? String.valueOf(car2.getTotal()) : "" },
-				{ "Version", car1 != null ? car1.getVersion() : "", car2 != null ? car2.getVersion() : "" } };
+				{ "Phiên bản", car1 != null ? car1.getVersion() : "", car2 != null ? car2.getVersion() : "" } };
 
 		String[] columnNames = { "Attribute", car1.getName(), car2.getName() };
 		compareTable.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
